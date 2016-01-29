@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-import reactor.core.flow.Fuseable;
+import reactor.core.flow.Fusable;
 import reactor.core.flow.MultiReceiver;
 import reactor.core.flow.Producer;
 import reactor.core.flow.Receiver;
@@ -842,12 +842,12 @@ final class FluxZip<T, R> extends Flux<R> implements Introspectable, MultiReceiv
 		@Override
 		public void onSubscribe(Subscription s) {
 			if (BackpressureUtils.setOnce(S, this, s)) {
-				if (s instanceof Fuseable.FusionSubscription) {
-					Fuseable.FusionSubscription<T> f = (Fuseable.FusionSubscription<T>) s;
+				if (s instanceof Fusable.FusableSubscription) {
+					Fusable.FusableSubscription<T> f = (Fusable.FusableSubscription<T>) s;
 
 					queue = f.queue();
 					
-					if (f.requestSyncFusion()) {
+					if (f.requestSyncFusing()) {
 						sourceMode = SYNC;
 						
 						done = true;

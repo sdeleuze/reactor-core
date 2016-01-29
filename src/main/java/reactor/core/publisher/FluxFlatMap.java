@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-import reactor.core.flow.Fuseable;
+import reactor.core.flow.Fusable;
 import reactor.core.flow.MultiReceiver;
 import reactor.core.flow.Producer;
 import reactor.core.flow.Receiver;
@@ -889,10 +889,10 @@ final class FluxFlatMap<T, R> extends FluxSource<T, R> {
 		@Override
 		public void onSubscribe(Subscription s) {
 			if (BackpressureUtils.setOnce(S, this, s)) {
-				if (s instanceof Fuseable.FusionSubscription) {
-					@SuppressWarnings("unchecked") Fuseable.FusionSubscription<R> f = (Fuseable.FusionSubscription<R>)s;
+				if (s instanceof Fusable.FusableSubscription) {
+					@SuppressWarnings("unchecked") Fusable.FusableSubscription<R> f = (Fusable.FusableSubscription<R>)s;
 					queue = f.queue();
-					if (f.requestSyncFusion()){
+					if (f.requestSyncFusing()){
 						sourceMode = SYNC;
 						done = true;
 						parent.drain();
