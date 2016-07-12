@@ -342,6 +342,11 @@ final class FluxSubscribeOn<T> extends FluxSource<T, T> implements Loopback {
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object downstream() {
 			return actual;
 		}

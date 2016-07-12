@@ -94,7 +94,12 @@ final class SingleTimedScheduler implements TimedScheduler {
     public TimedWorker createWorker() {
         return new SingleTimedSchedulerWorker(executor);
     }
-    
+
+    @Override
+    public long now(TimeUnit unit) {
+        return unit.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+    }
+
     static final class SingleTimedSchedulerWorker implements TimedWorker {
         final ScheduledThreadPoolExecutor executor;
         
@@ -221,6 +226,11 @@ final class SingleTimedScheduler implements TimedScheduler {
                     }
                 }
             }
+        }
+
+        @Override
+        public long now(TimeUnit unit) {
+            return unit.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
     }
 

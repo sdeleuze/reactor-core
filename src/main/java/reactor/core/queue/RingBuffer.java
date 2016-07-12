@@ -816,6 +816,25 @@ final class Wrapped<E> implements Sequence, Introspectable, Producer {
 		return TRACE_ONLY | INNER;
 	}
 
+	@Override
+	public Object getId() {
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		return getClass().getSimpleName();
+	}
+
+	@Override
+	public Throwable getError() {
+		return null;
+	}
+
+	@Override
+	public long getPeriod() {
+		return -1L;
+	}
 }
 
 /**

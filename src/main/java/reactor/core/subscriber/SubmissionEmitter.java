@@ -442,7 +442,33 @@ public final class SubmissionEmitter<E>
 				'}';
 	}
 
-//
+	@Override
+	public long getPending() {
+		return -1L;
+	}
+
+	@Override
+	public Object getId() {
+		return null;
+	}
+
+	@Override
+	public int getMode() {
+		return 0;
+	}
+
+	@Override
+	public String getName() {
+		return getClass().getSimpleName();
+	}
+
+	@Override
+	public long getPeriod() {
+		return -1L;
+	}
+
+
+	//
 
 	@SuppressWarnings("rawtypes")
     static final Predicate                                 NEVER     = o -> false;

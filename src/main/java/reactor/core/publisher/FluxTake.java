@@ -218,6 +218,11 @@ final class FluxTake<T> extends FluxSource<T, T> {
 		public long limit() {
 			return 0;
 		}
+
+		@Override
+		public long getPending() {
+			return -1L;
+		}
 	}
 
 	static final class TakeConditionalSubscriber<T>
@@ -386,9 +391,14 @@ final class FluxTake<T> extends FluxSource<T, T> {
 		public long limit() {
 			return 0;
 		}
+
+		@Override
+		public long getPending() {
+			return -1L;
+		}
 	}
 
-	static final class TakeFuseableSubscriber<T>
+	static final class TakeFuseableSubscriber<T> extends Fuseable.AbstractQueueSubscription<T>
 			implements Subscriber<T>, QueueSubscription<T>, Completable, Receiver,
 			           Prefetchable, Backpressurable, Producer {
 
@@ -592,6 +602,13 @@ final class FluxTake<T> extends FluxSource<T, T> {
 		public int size() {
 			return qs.size();
 		}
+
+		@Override
+		public long getPending() {
+			return -1L;
+		}
+
+
 	}
 
 }

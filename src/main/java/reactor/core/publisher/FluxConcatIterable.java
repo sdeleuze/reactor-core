@@ -164,4 +164,9 @@ final class FluxConcatIterable<T>
 
 		}
 	}
+
+	@Override
+	public long upstreamCount() {
+		return -1L;
+	}
 }

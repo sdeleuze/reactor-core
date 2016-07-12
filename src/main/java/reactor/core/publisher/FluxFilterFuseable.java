@@ -65,7 +65,7 @@ final class FluxFilterFuseable<T> extends FluxSource<T, T>
 		source.subscribe(new FilterFuseableSubscriber<>(s, predicate));
 	}
 
-	static final class FilterFuseableSubscriber<T> 
+	static final class FilterFuseableSubscriber<T> extends AbstractQueueSubscription<T>
 	implements Receiver, Producer, Loopback, Completable, SynchronousSubscription<T>, ConditionalSubscriber<T> {
 		final Subscriber<? super T> actual;
 
@@ -196,6 +196,11 @@ final class FluxFilterFuseable<T> extends FluxSource<T, T>
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return s;
 		}
@@ -268,7 +273,7 @@ final class FluxFilterFuseable<T> extends FluxSource<T, T>
 		}
 	}
 
-	static final class FilterFuseableConditionalSubscriber<T>
+	static final class FilterFuseableConditionalSubscriber<T> extends AbstractQueueSubscription<T>
 	implements Receiver, Producer, Loopback, Completable, SynchronousSubscription<T>, ConditionalSubscriber<T> {
 		final ConditionalSubscriber<? super T> actual;
 
@@ -395,6 +400,11 @@ final class FluxFilterFuseable<T> extends FluxSource<T, T>
 		@Override
 		public Object connectedInput() {
 			return predicate;
+		}
+
+		@Override
+		public Object connectedOutput() {
+			return null;
 		}
 
 		@Override

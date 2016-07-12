@@ -190,6 +190,16 @@ final class FluxWindowTimeOrSize<T> extends FluxBatch<T, Flux<T>> {
 		public Object connectedInput() {
 			return currentWindow;
 		}
+
+		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
 	}
 
 

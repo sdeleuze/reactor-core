@@ -58,7 +58,7 @@ final class FluxCreate<T> extends Flux<T> {
         }
     }
     
-    static final class DefaultFluxEmitter<T> 
+    static final class DefaultFluxEmitter<T> extends Fuseable.AbstractQueueSubscription<T>
     implements FluxEmitter<T>, QueueSubscription<T>, Producer {
 
         final Subscriber<? super T> actual; 
@@ -473,6 +473,26 @@ final class FluxCreate<T> extends Flux<T> {
         @Override
         public Object downstream() {
             return actual;
+        }
+
+        @Override
+        public Object getId() {
+            return null;
+        }
+
+        @Override
+        public int getMode() {
+            return 0;
+        }
+
+        @Override
+        public String getName() {
+            return getClass().getSimpleName();
+        }
+
+        @Override
+        public long getPeriod() {
+            return -1L;
         }
     }
 }

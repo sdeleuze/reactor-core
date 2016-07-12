@@ -123,13 +123,17 @@ final class FluxPublishOn<T> extends FluxSource<T, T> implements Fuseable, Loopb
 		return scheduler;
 	}
 
+	@Override
+	public Object connectedInput() {
+		return null;
+	}
 
 	@Override
 	public long getCapacity() {
 		return prefetch;
 	}
 
-	static final class PublishOnSubscriber<T>
+	static final class PublishOnSubscriber<T> extends AbstractQueueSubscription<T>
 			implements Subscriber<T>, QueueSubscription<T>, Runnable, Producer, Loopback,
 			           Backpressurable, Prefetchable, Receiver, Cancellable,
 			           Introspectable,
@@ -661,9 +665,29 @@ final class FluxPublishOn<T> extends FluxSource<T, T> implements Fuseable, Loopb
 		public int size() {
 			return queue.size();
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 
-	static final class PublishOnConditionalSubscriber<T>
+	static final class PublishOnConditionalSubscriber<T> extends AbstractQueueSubscription<T>
 			implements Subscriber<T>, QueueSubscription<T>, Runnable,
 			   Producer, Loopback, Backpressurable, Prefetchable, Receiver, Cancellable, Introspectable, Completable, Requestable {
 
@@ -1197,6 +1221,26 @@ final class FluxPublishOn<T> extends FluxSource<T, T> implements Fuseable, Loopb
 		@Override
 		public int size() {
 			return queue.size();
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
 		}
 	}
 }

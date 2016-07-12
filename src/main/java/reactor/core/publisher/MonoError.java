@@ -81,4 +81,9 @@ extends Mono<T> implements reactor.core.state.Completable {
 	public boolean isTerminated() {
 		return true;
 	}
+
+	@Override
+	public boolean isStarted() {
+		return false;
+	}
 }

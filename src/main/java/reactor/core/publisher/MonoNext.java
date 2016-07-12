@@ -141,5 +141,9 @@ final class MonoNext<T> extends MonoSource<T, T> {
 			return actual;
 		}
 
+		@Override
+		public long getPending() {
+			return -1L;
+		}
 	}
 }

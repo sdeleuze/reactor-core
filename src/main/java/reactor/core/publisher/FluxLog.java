@@ -181,6 +181,21 @@ final class FluxLog<IN> extends FluxSource<IN, IN> {
 		}
 
 		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
+
+		@Override
 		public String toString() {
 			return getName();
 		}

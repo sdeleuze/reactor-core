@@ -86,7 +86,12 @@ final class FluxJust<T> extends Flux<T> implements Fuseable.ScalarCallable<T>, F
 		return value;
 	}
 
-	static final class WeakScalarSubscription<T> implements QueueSubscription<T>, Receiver, Completable {
+	@Override
+	public Object connectedInput() {
+		return null;
+	}
+
+	static final class WeakScalarSubscription<T> extends AbstractQueueSubscription<T> implements QueueSubscription<T>, Receiver, Completable {
 
 		boolean terminado;
 		final T                     value;

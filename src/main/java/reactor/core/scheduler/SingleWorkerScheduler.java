@@ -52,5 +52,9 @@ final class SingleWorkerScheduler implements Scheduler, Executor {
     public Worker createWorker() {
         return new ExecutorScheduler.ExecutorSchedulerWorker(this);
     }
-    
+
+    @Override
+    public void start() {
+
+    }
 }

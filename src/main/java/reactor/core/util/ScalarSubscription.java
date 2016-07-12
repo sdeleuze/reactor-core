@@ -29,7 +29,7 @@ import reactor.core.flow.Receiver;
  *
  * @param <T> the value type
  */
-public final class ScalarSubscription<T> implements Fuseable.QueueSubscription<T>, Producer, Receiver {
+public final class ScalarSubscription<T> extends Fuseable.AbstractQueueSubscription<T> implements Fuseable.QueueSubscription<T>, Producer, Receiver {
 
 	final Subscriber<? super T> actual;
 

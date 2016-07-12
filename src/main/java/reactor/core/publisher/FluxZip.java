@@ -544,6 +544,21 @@ final class FluxZip<T, R> extends Flux<R>
 		public void dispose() {
 			BackpressureUtils.terminate(S, this);
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return 0;
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
 	}
 
 	static final class ZipCoordinator<T, R>
@@ -868,6 +883,26 @@ final class FluxZip<T, R> extends Flux<R>
 					break;
 				}
 			}
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
 		}
 	}
 

@@ -33,16 +33,12 @@ public interface MultiProducer {
 	 * the number of downstream receivers
 	 * @return the number of downstream receivers
 	 */
-	default long downstreamCount() {
-		return -1L;
-	}
+	long downstreamCount();
 
 	/**
 	 * Has any Subscriber attached to this multi-producer ?
 	 * @return Has any Subscriber attached to this multi-producer ?
 	 */
-	default boolean hasDownstreams() {
-		return downstreamCount() != 0;
-	}
+	boolean hasDownstreams();
 
 }

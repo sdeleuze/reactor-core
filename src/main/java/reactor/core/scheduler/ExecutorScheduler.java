@@ -61,6 +61,16 @@ final class ExecutorScheduler implements Scheduler {
                 : new ExecutorSchedulerWorker(executor);
     }
 
+    @Override
+    public void start() {
+        
+    }
+
+    @Override
+    public void shutdown() {
+
+    }
+
     /**
      * A non-tracked runnable that wraps a task and offers cancel support in the form
      * of not executing the task.

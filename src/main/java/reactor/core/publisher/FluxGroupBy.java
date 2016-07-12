@@ -15,6 +15,7 @@
  */
 package reactor.core.publisher;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Queue;
@@ -111,7 +112,7 @@ implements Fuseable, Backpressurable  {
 		return prefetch;
 	}
 	
-	static final class GroupByMain<T, K, V> implements Subscriber<T>,
+	static final class GroupByMain<T, K, V> extends AbstractQueueSubscription<GroupedFlux<K, V>> implements Subscriber<T>,
 	                                                   QueueSubscription<GroupedFlux<K, V>>, MultiProducer, Backpressurable, Producer, Requestable,
 	                                                   Cancellable, Completable, Receiver, Introspectable {
 
@@ -518,6 +519,31 @@ implements Fuseable, Backpressurable  {
 		void requestInner(long n) {
 			s.request(n);
 		}
+
+		@Override
+		public boolean hasDownstreams() {
+			return downstreamCount() != 0;
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 
 	static final class UnicastGroupedFlux<K, V> extends GroupedFlux<K, V>
@@ -891,6 +917,76 @@ implements Fuseable, Backpressurable  {
 		@Override
 		public long limit() {
 			return limit;
+		}
+
+		@Override
+		public V peek() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean add(V t) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean offer(V t) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public V remove() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public V element() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean contains(Object o) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public Iterator<V> iterator() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public Object[] toArray() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public <T1> T1[] toArray(T1[] a) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean remove(Object o) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean containsAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean addAll(Collection<? extends V> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean removeAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean retainAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 	}

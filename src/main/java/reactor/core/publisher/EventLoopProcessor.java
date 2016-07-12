@@ -406,6 +406,26 @@ final class EventLoopFactory extends AtomicInteger implements ThreadFactory,
 	public String getName() {
 		return name;
 	}
+
+	@Override
+	public Object getId() {
+		return null;
+	}
+
+	@Override
+	public int getMode() {
+		return 0;
+	}
+
+	@Override
+	public Throwable getError() {
+		return null;
+	}
+
+	@Override
+	public long getPeriod() {
+		return -1L;
+	}
 }
 
 final class EventLoopScheduler implements Scheduler, MultiProducer, Completable {
@@ -458,6 +478,11 @@ final class EventLoopScheduler implements Scheduler, MultiProducer, Completable 
 		for (ProcessorWorker processorWorker : workerPool) {
 			processorWorker.processor.shutdown();
 		}
+	}
+
+	@Override
+	public void start() {
+
 	}
 
 	ProcessorWorker next() {
@@ -661,6 +686,26 @@ final class EventLoopScheduler implements Scheduler, MultiProducer, Completable 
 		public void onComplete() {
 			thread = null;
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return 0;
+		}
 	}
 
 	/**
@@ -680,5 +725,10 @@ final class EventLoopScheduler implements Scheduler, MultiProducer, Completable 
 			array[0] = value;
 			count = 1;
 		}
+	}
+
+	@Override
+	public boolean hasDownstreams() {
+		return downstreamCount() != 0;
 	}
 }

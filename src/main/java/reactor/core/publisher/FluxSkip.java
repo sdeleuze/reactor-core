@@ -157,5 +157,10 @@ final class FluxSkip<T> extends FluxSource<T, T> {
 		public void cancel() {
 			s.cancel();
 		}
+
+		@Override
+		public long getPending() {
+			return -1L;
+		}
 	}
 }

@@ -77,7 +77,7 @@ final class FluxMapFuseable<T, R> extends FluxSource<T, R>
 		source.subscribe(new MapFuseableSubscriber<>(s, mapper));
 	}
 
-	static final class MapFuseableSubscriber<T, R>
+	static final class MapFuseableSubscriber<T, R> extends AbstractQueueSubscription<R>
 	implements Subscriber<T>, Completable, Receiver, Producer, Loopback, SynchronousSubscription<R> {
 		final Subscriber<? super R>			actual;
 		final Function<? super T, ? extends R> mapper;
@@ -179,6 +179,11 @@ final class FluxMapFuseable<T, R> extends FluxSource<T, R>
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return s;
 		}
@@ -238,7 +243,7 @@ final class FluxMapFuseable<T, R> extends FluxSource<T, R>
 		}
 	}
 
-	static final class MapFuseableConditionalSubscriber<T, R> 
+	static final class MapFuseableConditionalSubscriber<T, R> extends AbstractQueueSubscription<R>
 	implements ConditionalSubscriber<T>, Completable, Receiver, Producer, Loopback, SynchronousSubscription<R> {
 		final ConditionalSubscriber<? super R>			actual;
 		final Function<? super T, ? extends R> mapper;
@@ -375,6 +380,11 @@ final class FluxMapFuseable<T, R> extends FluxSource<T, R>
 		@Override
 		public Object connectedInput() {
 			return mapper;
+		}
+
+		@Override
+		public Object connectedOutput() {
+			return null;
 		}
 
 		@Override

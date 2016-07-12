@@ -5441,6 +5441,32 @@ public abstract class Flux<T> implements Publisher<T>, Introspectable, Backpress
 		return onAssembly(new FluxZipIterable<>(this, iterable, zipper));
 	}
 
+	@Override
+	public long getCapacity() {
+		return -1L;
+	}
+
+	@Override
+	public long getPending() {
+		return -1L;
+	}
+
+	@Override
+	public Object getId() {
+		return null;
+	}
+
+	@Override
+	public long getPeriod() {
+		return -1L;
+	}
+
+	@Override
+	public Throwable getError() {
+		return null;
+	}
+
+
 	final int getPrefetchOrDefault(int defaultPrefetch) {
 		long c = getCapacity();
 		if (c < 0L) {
@@ -5556,4 +5582,6 @@ public abstract class Flux<T> implements Publisher<T>, Introspectable, Backpress
 	static <O> Supplier<Set<O>> hashSetSupplier() {
 		return SET_SUPPLIER;
 	}
+
+
 }

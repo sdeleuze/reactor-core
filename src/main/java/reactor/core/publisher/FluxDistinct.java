@@ -16,6 +16,7 @@
 package reactor.core.publisher;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -209,6 +210,11 @@ final class FluxDistinct<T, K, C extends Collection<? super K>> extends FluxSour
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return s;
 		}
@@ -373,6 +379,11 @@ final class FluxDistinct<T, K, C extends Collection<? super K>> extends FluxSour
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return s;
 		}
@@ -516,6 +527,11 @@ final class FluxDistinct<T, K, C extends Collection<? super K>> extends FluxSour
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return qs;
 		}
@@ -578,6 +594,76 @@ final class FluxDistinct<T, K, C extends Collection<? super K>> extends FluxSour
 		@Override
 		public int size() {
 			return qs.size();
+		}
+
+		@Override
+		public T peek() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean add(T t) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean offer(T t) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public T remove() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public T element() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean contains(Object o) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public Iterator<T> iterator() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public Object[] toArray() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public <T1> T1[] toArray(T1[] a) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean remove(Object o) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean containsAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean addAll(Collection<? extends T> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean removeAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean retainAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 	}
 

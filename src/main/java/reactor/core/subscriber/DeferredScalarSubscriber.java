@@ -35,7 +35,7 @@ import reactor.core.util.BackpressureUtils;
  * @param <I> The upstream sequence type
  * @param <O> The downstream sequence type
  */
-public class DeferredScalarSubscriber<I, O> implements Subscriber<I>, Completable, Loopback, Cancellable,
+public class DeferredScalarSubscriber<I, O> extends Fuseable.AbstractQueueSubscription<O> implements Subscriber<I>, Completable, Loopback, Cancellable,
                                                        Receiver, Producer,
                                                        Fuseable.QueueSubscription<O> {
 
@@ -181,6 +181,11 @@ public class DeferredScalarSubscriber<I, O> implements Subscriber<I>, Completabl
 	@Override
 	public Object connectedOutput() {
 		return value;
+	}
+
+	@Override
+	public Object connectedInput() {
+		return null;
 	}
 
 	@Override

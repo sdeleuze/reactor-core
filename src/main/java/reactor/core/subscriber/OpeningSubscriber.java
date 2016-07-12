@@ -30,8 +30,8 @@ import reactor.core.util.Exceptions;
  * A Subscriber with a safe Subscription callback
  * @author Stephane Maldini
  */
-final class OpeningSubscriber<T> implements BaseSubscriber<T>,
-                                            Backpressurable, Receiver {
+final class OpeningSubscriber<T> extends BaseSubscriber<T>
+		implements Backpressurable, Receiver {
 
 	final Consumer<? super Subscription>              subscriptionHandler;
 	final BiConsumer<? super T, ? super Subscription> dataConsumer;
@@ -81,7 +81,7 @@ final class OpeningSubscriber<T> implements BaseSubscriber<T>,
 
 	@Override
 	public void onNext(T t) {
-		BaseSubscriber.super.onNext(t);
+		super.onNext(t);
 
 		if (dataConsumer != null) {
 			try {
@@ -98,7 +98,7 @@ final class OpeningSubscriber<T> implements BaseSubscriber<T>,
 
 	@Override
 	public void onError(Throwable t) {
-		BaseSubscriber.super.onError(t);
+		super.onError(t);
 
 		if (errorConsumer != null) {
 			errorConsumer.accept(t);

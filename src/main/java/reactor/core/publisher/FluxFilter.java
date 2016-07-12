@@ -187,6 +187,11 @@ final class FluxFilter<T> extends FluxSource<T, T> {
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return s;
 		}
@@ -309,6 +314,11 @@ final class FluxFilter<T> extends FluxSource<T, T> {
 		@Override
 		public Object connectedInput() {
 			return predicate;
+		}
+
+		@Override
+		public Object connectedOutput() {
+			return null;
 		}
 
 		@Override

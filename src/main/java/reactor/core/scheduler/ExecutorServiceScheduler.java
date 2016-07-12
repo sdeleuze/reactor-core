@@ -55,6 +55,16 @@ final class ExecutorServiceScheduler implements Scheduler {
 		return () -> f.cancel(true);
 	}
 
+	@Override
+	public void start() {
+
+	}
+
+	@Override
+	public void shutdown() {
+
+	}
+
 	static final class ExecutorServiceWorker implements Worker {
 
 		final ExecutorService executor;

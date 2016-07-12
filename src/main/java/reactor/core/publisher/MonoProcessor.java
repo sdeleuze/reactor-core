@@ -584,7 +584,29 @@ public final class MonoProcessor<O> extends Mono<O>
 		public void subscribe(Subscriber s) {
 
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
+
 	}
+
 	final static NoopProcessor NOOP_PROCESSOR = new NoopProcessor();
 	@SuppressWarnings("rawtypes")
     final static AtomicIntegerFieldUpdater<MonoProcessor>              STATE     =

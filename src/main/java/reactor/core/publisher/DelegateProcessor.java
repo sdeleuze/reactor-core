@@ -82,4 +82,14 @@ final class DelegateProcessor<IN, OUT> extends FluxProcessor<IN, OUT>
 	public Subscription upstream() {
 		return upstreamSubscription;
 	}
+
+	@Override
+	public boolean isStarted() {
+		return false;
+	}
+
+	@Override
+	public boolean isTerminated() {
+		return false;
+	}
 }

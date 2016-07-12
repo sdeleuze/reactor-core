@@ -2523,6 +2523,26 @@ public abstract class Mono<T> implements Publisher<T>, Backpressurable, Introspe
 		return subscribeWith(new MonoToCompletableFuture<>());
 	}
 
+	@Override
+	public long getPending() {
+		return -1L;
+	}
+
+	@Override
+	public Object getId() {
+		return null;
+	}
+
+	@Override
+	public Throwable getError() {
+		return null;
+	}
+
+	@Override
+	public long getPeriod() {
+		return -1L;
+	}
+
 	/**
 	 * Wrap the source into a PublisherOnAssembly or PublisherCallableOnAssembly if {@code
 	 * trackAssembly} is set to true.

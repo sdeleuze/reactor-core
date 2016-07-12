@@ -29,7 +29,7 @@ import reactor.core.util.Exceptions;
  * 
  * @param <T> the value type observed
  */
-public interface BaseSubscriber<T> extends Subscriber<T> {
+public abstract class BaseSubscriber<T> implements Subscriber<T> {
 
 	/**
 	 * Trigger onSubscribe with a stateless subscription to signal this subscriber it can start receiving
@@ -42,7 +42,7 @@ public interface BaseSubscriber<T> extends Subscriber<T> {
 	 * 
 	 * @return this
 	 */
-	default BaseSubscriber<T> connect() {
+	public BaseSubscriber<T> connect() {
 		onSubscribe(EmptySubscription.INSTANCE);
 		return this;
 	}
@@ -52,7 +52,7 @@ public interface BaseSubscriber<T> extends Subscriber<T> {
 	 *
 	 * @return a new subscribed {@link SubmissionEmitter}
 	 */
-	default SubmissionEmitter<T> connectEmitter() {
+	public SubmissionEmitter<T> connectEmitter() {
 		return connectEmitter(true);
 	}
 
@@ -63,18 +63,18 @@ public interface BaseSubscriber<T> extends Subscriber<T> {
 	 * @param autostart automatically start?
 	 * @return a new {@link SubmissionEmitter}
 	 */
-	default SubmissionEmitter<T> connectEmitter(boolean autostart) {
+	public SubmissionEmitter<T> connectEmitter(boolean autostart) {
 		return SubmissionEmitter.create(this, autostart);
 	}
 
 	@Override
-	default void onSubscribe(Subscription s) {
+	public void onSubscribe(Subscription s) {
 		BackpressureUtils.validate(null, s);
 		//To validate with BackpressureUtils.validate(current, s)
 	}
 
 	@Override
-	default void onNext(T t) {
+	public void onNext(T t) {
 		if (t == null) {
 			throw Exceptions.argumentIsNullException();
 		}
@@ -82,7 +82,7 @@ public interface BaseSubscriber<T> extends Subscriber<T> {
 	}
 
 	@Override
-	default void onError(Throwable t) {
+	public void onError(Throwable t) {
 		if (t == null) {
 			throw Exceptions.argumentIsNullException();
 		}
@@ -90,7 +90,7 @@ public interface BaseSubscriber<T> extends Subscriber<T> {
 	}
 
 	@Override
-	default void onComplete() {
+	public void onComplete() {
 
 	}
 }

@@ -168,6 +168,11 @@ final class FluxMap<T, R> extends FluxSource<T, R> {
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return s;
 		}
@@ -301,6 +306,11 @@ final class FluxMap<T, R> extends FluxSource<T, R> {
 		@Override
 		public Object connectedInput() {
 			return mapper;
+		}
+
+		@Override
+		public Object connectedOutput() {
+			return null;
 		}
 
 		@Override

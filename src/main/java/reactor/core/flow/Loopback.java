@@ -24,14 +24,10 @@ public interface Loopback {
 	/**
 	 * @return component delegated to for incoming data or {@code null} if unavailable
 	 */
-	default Object connectedInput() {
-		return null;
-	}
+	Object connectedInput();
 
 	/**
 	 * @return component delegated to for outgoing data or {@code null} if unavailable
 	 */
-	default Object connectedOutput() {
-		return null;
-	}
+	Object connectedOutput();
 }

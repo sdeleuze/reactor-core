@@ -160,7 +160,12 @@ final class CompositeTimedWorker implements TimedWorker {
             tasks.remove(f);
         }
     }
-    
+
+    @Override
+    public long now(TimeUnit unit) {
+        return unit.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+    }
+
     static final Cancellation FINISHED = () -> { };
     static final Cancellation CANCELLED = () -> { };
 

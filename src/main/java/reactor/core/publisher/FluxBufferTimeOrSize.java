@@ -96,6 +96,16 @@ final class FluxBufferTimeOrSize<T> extends FluxBatch<T, List<T>> {
 			}
 			subscriber.onNext(toSend);
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 }
 

@@ -48,9 +48,7 @@ public interface Introspectable {
 	 * Defined identifier or null if not available
 	 * @return defined identifier or null if not available
 	 */
-	default Object getId() {
-		return null;
-	}
+	Object getId();
 
 
 	/**
@@ -60,33 +58,25 @@ public interface Introspectable {
 	 *
 	 * @return the current reactive modes
 	 */
-	default int getMode() {
-		return 0;
-	}
+	int getMode();
 
 
 	/**
 	 * The name of the component
 	 * @return the name of the component
 	 */
-	default String getName() {
-		return getClass().getSimpleName();
-	}
+	String getName();
 
 	/**
 	 * Current error if any, default to null
 	 * @return Current error if any, default to null
 	 */
-	default Throwable getError(){
-		return null;
-	}
+	Throwable getError();
 
 	/**
 	 * Can represent a period duration if the component is timed otherwise -1L
 	 * @return a period duration if the component is timed or -1L
 	 */
-	default long getPeriod(){
-		return -1L;
-	}
+	long getPeriod();
 
 }

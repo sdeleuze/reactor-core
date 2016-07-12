@@ -650,6 +650,11 @@ public final class EmitterProcessor<T> extends FluxProcessor<T, T>
 				'}';
 	}
 
+	@Override
+	public boolean hasDownstreams() {
+		return downstreamCount() != 0;
+	}
+
 	static final class EmitterSubscriber<T>
 			implements Subscription, Introspectable, Completable, Cancellable, Backpressurable, Receiver,
 			           Requestable, Producer {
@@ -761,6 +766,21 @@ public final class EmitterProcessor<T> extends FluxProcessor<T, T>
 		@Override
 		public Subscriber<? super T> downstream() {
 			return actual;
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
 		}
 	}
 

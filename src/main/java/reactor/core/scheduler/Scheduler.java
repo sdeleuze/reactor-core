@@ -58,9 +58,7 @@ public interface Scheduler {
 	 * start() and shutdown() concurrently as it would non-deterministically
 	 * leave the Scheduler in either active or inactive state.
 	 */
-	default void start() {
-		
-	}
+	void start();
 	
 	/**
 	 * Instructs this Scheduler to release all resources and reject
@@ -70,9 +68,7 @@ public interface Scheduler {
 	 * start() and shutdown() concurrently as it would non-deterministically
 	 * leave the Scheduler in either active or inactive state.
 	 */
-	default void shutdown() {
-		
-	}
+	void shutdown();
 	
 	/**
 	 * A worker representing an asynchronous boundary that executes tasks in

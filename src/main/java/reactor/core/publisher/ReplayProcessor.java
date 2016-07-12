@@ -319,6 +319,11 @@ public final class ReplayProcessor<T> extends FluxProcessor<T, T>
 		return this;
 	}
 
+	@Override
+	public boolean hasDownstreams() {
+		return downstreamCount() != 0;
+	}
+
 	interface Buffer<T> {
 
 		void onNext(T value);
@@ -828,7 +833,7 @@ public final class ReplayProcessor<T> extends FluxProcessor<T, T>
 		}
 	}
 
-	static final class ReplaySubscription<T> implements QueueSubscription<T>, Producer,
+	static final class ReplaySubscription<T> extends AbstractQueueSubscription<T> implements QueueSubscription<T>, Producer,
 	                                                    Cancellable, Receiver,
 	                                                    Requestable {
 		final Subscriber<? super T> actual;

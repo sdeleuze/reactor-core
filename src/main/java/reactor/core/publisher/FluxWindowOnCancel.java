@@ -223,6 +223,10 @@ final class FluxWindowOnCancel<T> extends FluxSource<T, Flux<T>> {
 			return window != null ? 1L : 0L;
 		}
 
+		@Override
+		public boolean hasDownstreams() {
+			return downstreamCount() != 0;
+		}
 	}
 
 }

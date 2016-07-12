@@ -72,4 +72,9 @@ extends Mono<Object>
 	public boolean isTerminated() {
 		return true;
 	}
+
+	@Override
+	public boolean isStarted() {
+		return false;
+	}
 }

@@ -152,6 +152,11 @@ final class FluxTakeWhile<T> extends FluxSource<T, T> {
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return s;
 		}

@@ -182,6 +182,21 @@ abstract class FluxBatch<T, V> extends FluxSource<T, V> {
 			return isFailed() ? FAILED_SATE : null;
 		}
 
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
+
 		private static final Exception FAILED_SATE = new RuntimeException("Failed Subscriber"){
 			/** */
             private static final long serialVersionUID = 7503907754069414227L;

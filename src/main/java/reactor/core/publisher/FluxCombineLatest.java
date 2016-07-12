@@ -204,7 +204,7 @@ extends Flux<R>
 		coordinator.subscribe(a, n);
 	}
 	
-	static final class CombineLatestCoordinator<T, R> 
+	static final class CombineLatestCoordinator<T, R> extends AbstractQueueSubscription<R>
 	implements QueueSubscription<R>, MultiReceiver, Cancellable {
 
 		final Subscriber<? super R> actual;
@@ -640,6 +640,26 @@ extends Flux<R>
 		@Override
 		public int getMode() {
 			return INNER;
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
 		}
 	}
 	

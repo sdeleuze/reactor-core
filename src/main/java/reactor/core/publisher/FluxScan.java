@@ -252,6 +252,11 @@ final class FluxScan<T, R> extends FluxSource<T, R> {
 		}
 
 		@Override
+		public Object connectedOutput() {
+			return null;
+		}
+
+		@Override
 		public Object upstream() {
 			return s;
 		}

@@ -81,7 +81,7 @@ extends Flux<T> {
 		s.onSubscribe(new GenerateSubscription<>(s, state, generator, stateConsumer));
 	}
 
-	static final class GenerateSubscription<T, S>
+	static final class GenerateSubscription<T, S> extends Fuseable.AbstractQueueSubscription<T>
 	  implements QueueSubscription<T>, SignalEmitter<T> {
 
 		final Subscriber<? super T> actual;
@@ -365,6 +365,36 @@ extends Flux<T> {
 		public void clear() {
 			generatedError = null;
 			generatedValue = null;
+		}
+
+		@Override
+		public long getCapacity() {
+			return -1L;
+		}
+
+		@Override
+		public long getPending() {
+			return -1L;
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
 		}
 	}
 }

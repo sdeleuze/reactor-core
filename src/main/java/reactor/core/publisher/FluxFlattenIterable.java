@@ -101,7 +101,7 @@ final class FluxFlattenIterable<T, R> extends FluxSource<T, R> implements Fuseab
 		source.subscribe(new ConcatMapIterableSubscriber<>(s, mapper, prefetch, queueSupplier));
 	}
 	
-	static final class ConcatMapIterableSubscriber<T, R> 
+	static final class ConcatMapIterableSubscriber<T, R> extends AbstractQueueSubscription<R>
 	implements Subscriber<T>, QueueSubscription<R> {
 		
 		final Subscriber<? super R> actual;

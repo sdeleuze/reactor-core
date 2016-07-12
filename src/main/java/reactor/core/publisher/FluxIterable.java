@@ -101,7 +101,7 @@ extends Flux<T>
 		}
 	}
 
-	static final class IterableSubscription<T>
+	static final class IterableSubscription<T> extends AbstractQueueSubscription<T>
 			implements Producer, Completable, Requestable, Cancellable, SynchronousSubscription<T> {
 
 		final Subscriber<? super T> actual;
@@ -344,9 +344,14 @@ extends Flux<T>
 			}
 			return 1;
 		}
+
+		@Override
+		public int requestFusion(int requestedMode) {
+			return Fuseable.SYNC;
+		}
 	}
 
-	static final class IterableSubscriptionConditional<T>
+	static final class IterableSubscriptionConditional<T> extends AbstractQueueSubscription<T>
 			implements Producer, Completable, Requestable, Cancellable, Subscription, SynchronousSubscription<T> {
 
 		final ConditionalSubscriber<? super T> actual;
@@ -587,6 +592,11 @@ extends Flux<T>
 				return 0;
 			}
 			return 1; // no way of knowing without enumerating first
+		}
+
+		@Override
+		public int requestFusion(int requestedMode) {
+			return Fuseable.SYNC;
 		}
 	}
 }

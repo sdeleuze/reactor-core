@@ -266,7 +266,7 @@ final class FluxOnAssembly<T> extends FluxSource<T, T> implements Fuseable, Asse
 		}
 	}
 
-	static class OnAssemblySubscriber<T>
+	static class OnAssemblySubscriber<T> extends AbstractQueueSubscription<T>
 			implements Subscriber<T>, QueueSubscription<T> {
 
 		final String                stacktrace;

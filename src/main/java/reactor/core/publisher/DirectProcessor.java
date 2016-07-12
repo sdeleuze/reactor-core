@@ -335,6 +335,26 @@ public final class DirectProcessor<T>
 		public int getMode() {
 			return INNER;
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 
 	@Override

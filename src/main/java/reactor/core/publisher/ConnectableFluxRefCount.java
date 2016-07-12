@@ -83,6 +83,11 @@ final class ConnectableFluxRefCount<T> extends Flux<T>
 	}
 
 	@Override
+	public Object connectedInput() {
+		return null;
+	}
+
+	@Override
 	public Object upstream() {
 		return source;
 	}
@@ -168,6 +173,11 @@ final class ConnectableFluxRefCount<T> extends Flux<T>
 		@Override
 		public Object upstream() {
 			return parent;
+		}
+
+		@Override
+		public boolean hasDownstreams() {
+			return downstreamCount() != 0;
 		}
 
 		static final class InnerSubscriber<T> implements Subscriber<T>, Subscription, Receiver, Producer, Loopback {

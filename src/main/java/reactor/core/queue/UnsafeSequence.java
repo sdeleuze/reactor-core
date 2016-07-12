@@ -134,4 +134,19 @@ final class UnsafeSequence extends RhsPadding implements Sequence, LongSupplier,
     public String getName() {
         return UnsafeSequence.class.getSimpleName();
     }
+
+    @Override
+    public Object getId() {
+        return null;
+    }
+
+    @Override
+    public Throwable getError() {
+        return null;
+    }
+
+    @Override
+    public long getPeriod() {
+        return -1L;
+    }
 }

@@ -19,9 +19,11 @@ package reactor.core.publisher;
 import org.reactivestreams.Processor;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 import reactor.core.state.Backpressurable;
 import reactor.core.state.Completable;
-import reactor.core.subscriber.BaseSubscriber;
+import reactor.core.subscriber.SubmissionEmitter;
+import reactor.core.util.BackpressureUtils;
 import reactor.core.util.EmptySubscription;
 import reactor.core.util.Exceptions;
 
@@ -38,7 +40,7 @@ import reactor.core.util.Exceptions;
  * @param <OUT> the output value type
  */
 public abstract class FluxProcessor<IN, OUT> extends Flux<OUT>
-		implements Processor<IN, OUT>, Backpressurable, Completable, BaseSubscriber<IN> {
+		implements Processor<IN, OUT>, Backpressurable, Completable, Subscriber<IN> {
 
 	/**
 	 * Build a {@link FluxProcessor} whose data are emitted by the most recent emitted {@link Publisher}.
@@ -74,12 +76,6 @@ public abstract class FluxProcessor<IN, OUT> extends Flux<OUT>
 	}
 
 	@Override
-	public FluxProcessor<IN, OUT> connect() {
-		onSubscribe(EmptySubscription.INSTANCE);
-		return this;
-	}
-
-	@Override
 	public long getCapacity() {
 		return Long.MAX_VALUE;
 	}
@@ -89,6 +85,47 @@ public abstract class FluxProcessor<IN, OUT> extends Flux<OUT>
 		if (s == null) {
 			throw Exceptions.argumentIsNullException();
 		}
+	}
+
+
+	public Subscriber<IN> connect() {
+		onSubscribe(EmptySubscription.INSTANCE);
+		return this;
+	}
+
+	public SubmissionEmitter<IN> connectEmitter() {
+		return connectEmitter(true);
+	}
+
+	public SubmissionEmitter<IN> connectEmitter(boolean autostart) {
+		return SubmissionEmitter.create(this, autostart);
+	}
+
+	@Override
+	public void onSubscribe(Subscription s) {
+		BackpressureUtils.validate(null, s);
+		//To validate with BackpressureUtils.validate(current, s)
+	}
+
+	@Override
+	public void onNext(IN t) {
+		if (t == null) {
+			throw Exceptions.argumentIsNullException();
+		}
+
+	}
+
+	@Override
+	public void onError(Throwable t) {
+		if (t == null) {
+			throw Exceptions.argumentIsNullException();
+		}
+		Exceptions.throwIfFatal(t);
+	}
+
+	@Override
+	public void onComplete() {
+
 	}
 
 }

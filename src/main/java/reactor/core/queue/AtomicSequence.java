@@ -101,4 +101,24 @@ final class AtomicSequence extends RhsPadding implements LongSupplier, Sequence,
     public int getMode() {
         return TRACE_ONLY;
     }
+
+    @Override
+    public Object getId() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return getClass().getSimpleName();
+    }
+
+    @Override
+    public Throwable getError() {
+        return null;
+    }
+
+    @Override
+    public long getPeriod() {
+        return -1L;
+    }
 }

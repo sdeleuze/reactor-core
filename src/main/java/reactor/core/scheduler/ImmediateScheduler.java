@@ -52,7 +52,17 @@ final class ImmediateScheduler implements Scheduler {
     public Worker createWorker() {
         return new ImmediateSchedulerWorker();
     }
-    
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void shutdown() {
+
+    }
+
     static final class ImmediateSchedulerWorker implements Scheduler.Worker {
         
         volatile boolean shutdown;

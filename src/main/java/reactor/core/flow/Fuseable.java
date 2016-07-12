@@ -102,73 +102,77 @@ public interface Fuseable {
 		 */
 		int requestFusion(int requestedMode);
 
+	}
+
+	abstract class AbstractQueueSubscription<T> implements QueueSubscription<T> {
+
 		@Override
-		default T peek() {
+		public T peek() {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default boolean add(T t) {
+		public boolean add(T t) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default boolean offer(T t) {
+		public boolean offer(T t) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default T remove() {
+		public T remove() {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default T element() {
+		public T element() {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default boolean contains(Object o) {
+		public boolean contains(Object o) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default Iterator<T> iterator() {
+		public Iterator<T> iterator() {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default Object[] toArray() {
+		public Object[] toArray() {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default <T1> T1[] toArray(T1[] a) {
+		public <T1> T1[] toArray(T1[] a) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default boolean remove(Object o) {
+		public boolean remove(Object o) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default boolean containsAll(Collection<?> c) {
+		public boolean containsAll(Collection<?> c) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default boolean addAll(Collection<? extends T> c) {
+		public boolean addAll(Collection<? extends T> c) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default boolean removeAll(Collection<?> c) {
+		public boolean removeAll(Collection<?> c) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 
 		@Override
-		default boolean retainAll(Collection<?> c) {
+		public boolean retainAll(Collection<?> c) {
 			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 	}
@@ -183,9 +187,7 @@ public interface Fuseable {
 	interface SynchronousSubscription<T> extends QueueSubscription<T>, Queue<T> {
 
 		@Override
-		default int requestFusion(int requestedMode) {
-			return Fuseable.SYNC;
-		}
+		int requestFusion(int requestedMode);
 
 	}
 

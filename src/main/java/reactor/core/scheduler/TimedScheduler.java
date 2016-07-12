@@ -62,9 +62,7 @@ public interface TimedScheduler extends Scheduler {
 	 * @param unit the target unit of the current time
 	 * @return the current time value in the target unit of measure
 	 */
-	default long now(TimeUnit unit) {
-		return unit.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-	}
+	long now(TimeUnit unit);
 	
 	@Override
 	TimedWorker createWorker();
@@ -110,8 +108,6 @@ public interface TimedScheduler extends Scheduler {
 		 * @param unit the target unit of the current time
 		 * @return the current time value in the target unit of measure
 		 */
-		default long now(TimeUnit unit) {
-			return unit.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-		}
+		long now(TimeUnit unit);
 	}
 }

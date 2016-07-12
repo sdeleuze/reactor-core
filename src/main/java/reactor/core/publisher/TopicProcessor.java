@@ -776,6 +776,11 @@ public final class TopicProcessor<E> extends EventLoopProcessor<E>  {
 		}
 	}
 
+	@Override
+	public boolean hasDownstreams() {
+		return downstreamCount() != 0;
+	}
+
 	/**
 	 * Disruptor BatchEventProcessor port that deals with pending demand. <p> Convenience
 	 * class for handling the batching semantics of consuming entries from a {@link
@@ -1007,6 +1012,21 @@ public final class TopicProcessor<E> extends EventLoopProcessor<E>  {
 		@Override
 		public String getName() {
 			return processor.getName()+"#loop";
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
 		}
 	}
 

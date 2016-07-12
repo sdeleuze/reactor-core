@@ -35,8 +35,8 @@ import reactor.core.util.Exceptions;
  * @param <I> the input value type
  * @param <O> the output value type
  */
-public class SubscriberBarrier<I, O>
-		implements BaseSubscriber<I>, Subscription, Backpressurable, Completable, Receiver, Producer {
+public class SubscriberBarrier<I, O> extends BaseSubscriber<I>
+		implements Subscription, Backpressurable, Completable, Receiver, Producer {
 
 	protected final Subscriber<? super O> subscriber;
 
@@ -82,7 +82,7 @@ public class SubscriberBarrier<I, O>
 
 	@Override
 	public final void onNext(I i) {
-		BaseSubscriber.super.onNext(i);
+		super.onNext(i);
 		try {
 			doNext(i);
 		} catch (Exceptions.CancelException c) {
@@ -104,7 +104,7 @@ public class SubscriberBarrier<I, O>
 
 	@Override
 	public final void onError(Throwable t) {
-		BaseSubscriber.super.onError(t);
+		super.onError(t);
 		doError(t);
 	}
 

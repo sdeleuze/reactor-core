@@ -197,6 +197,20 @@ final class ConnectableFluxProcess<T, U> extends ConnectableFlux<U> implements P
 			return processor;
 		}
 
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
 	}
 
 	final static class StateNormal<T, U>
@@ -346,6 +360,76 @@ final class ConnectableFluxProcess<T, U> extends ConnectableFlux<U> implements P
 			if(CONNECTED.compareAndSet(this, 1, 2)) {
 				s.clear();
 			}
+		}
+
+		@Override
+		public T peek() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean add(T t) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean offer(T t) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public T remove() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public T element() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean contains(Object o) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public Iterator<T> iterator() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public Object[] toArray() {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public <T1> T1[] toArray(T1[] a) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean remove(Object o) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean containsAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean addAll(Collection<? extends T> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean removeAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
+		}
+
+		@Override
+		public boolean retainAll(Collection<?> c) {
+			throw new UnsupportedOperationException("Operators should not use this method!");
 		}
 	}
 

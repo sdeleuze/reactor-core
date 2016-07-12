@@ -76,7 +76,7 @@ final class FluxRange
 		s.onSubscribe(new RangeSubscription(s, st, en));
 	}
 
-	static final class RangeSubscription
+	static final class RangeSubscription extends AbstractQueueSubscription<Integer>
 	  implements Cancellable, Requestable, Completable, Producer, SynchronousSubscription<Integer> {
 
 		final Subscriber<? super Integer> actual;
@@ -229,9 +229,14 @@ final class FluxRange
 		public int size() {
 			return (int)(end - index);
 		}
+
+		@Override
+		public int requestFusion(int requestedMode) {
+			return Fuseable.SYNC;
+		}
 	}
 	
-	static final class RangeSubscriptionConditional
+	static final class RangeSubscriptionConditional extends AbstractQueueSubscription<Integer>
 	implements Cancellable, Requestable, Completable, Producer, SynchronousSubscription<Integer> {
 
 		final ConditionalSubscriber<? super Integer> actual;
@@ -385,6 +390,11 @@ final class FluxRange
 		@Override
 		public int size() {
 			return (int)(end - index);
+		}
+
+		@Override
+		public int requestFusion(int requestedMode) {
+			return Fuseable.SYNC;
 		}
 	}
 }

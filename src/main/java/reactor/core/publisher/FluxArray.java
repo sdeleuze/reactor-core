@@ -68,7 +68,7 @@ extends Flux<T>
 		subscribe(s, array);
 	}
 
-	static final class ArraySubscription<T>
+	static final class ArraySubscription<T> extends AbstractQueueSubscription<T>
 	  implements Producer, Requestable, Cancellable, MultiReceiver, SynchronousSubscription<T> {
 		final Subscriber<? super T> actual;
 
@@ -235,9 +235,14 @@ extends Flux<T>
 		public int size() {
 			return array.length - index;
 		}
+
+		@Override
+		public int requestFusion(int requestedMode) {
+			return Fuseable.SYNC;
+		}
 	}
 
-	static final class ArrayConditionalSubscription<T>
+	static final class ArrayConditionalSubscription<T> extends AbstractQueueSubscription<T>
 			implements Producer, Requestable, Cancellable, MultiReceiver,
 			           SynchronousSubscription<T> {
 
@@ -409,6 +414,11 @@ extends Flux<T>
 		@Override
 		public int size() {
 			return array.length - index;
+		}
+
+		@Override
+		public int requestFusion(int requestedMode) {
+			return Fuseable.SYNC;
 		}
 	}
 

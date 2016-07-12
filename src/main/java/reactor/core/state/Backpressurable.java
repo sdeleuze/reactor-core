@@ -26,16 +26,12 @@ public interface Backpressurable {
 	 *
 	 * @return long capacity
 	 */
-	default long getCapacity() {
-		return -1L;
-	}
+	long getCapacity();
 
 	/**
 	 * Return current used space in buffer
 	 *
 	 * @return long capacity
 	 */
-	default long getPending() {
-		return -1L;
-	}
+	long getPending();
 }

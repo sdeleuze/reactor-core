@@ -24,7 +24,5 @@ public interface Cancellable {
 	/**
 	 * @return has the downstream "cancelled" and interrupted its consuming ?
 	 */
-	default boolean isCancelled(){
-		return false;
-	}
+	boolean isCancelled();
 }

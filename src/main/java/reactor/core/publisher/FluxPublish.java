@@ -637,7 +637,7 @@ final class FluxPublish<T, R> extends FluxSource<T, R> implements Fuseable {
 		}
 	}
 	
-	static final class CancelMulticaster<T> implements Subscriber<T>, QueueSubscription<T> {
+	static final class CancelMulticaster<T> extends AbstractQueueSubscription<T> implements Subscriber<T>, QueueSubscription<T> {
 		final Subscriber<? super T> actual;
 		
 		final FluxPublishMulticaster<?, ?> parent;
@@ -712,7 +712,7 @@ final class FluxPublish<T, R> extends FluxSource<T, R> implements Fuseable {
 		}
 	}
 
-	static final class CancelFuseableMulticaster<T> implements Subscriber<T>, QueueSubscription<T> {
+	static final class CancelFuseableMulticaster<T> extends AbstractQueueSubscription<T> implements Subscriber<T>, QueueSubscription<T> {
 		final Subscriber<? super T> actual;
 		
 		final FluxPublishMulticaster<?, ?> parent;

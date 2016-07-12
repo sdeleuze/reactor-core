@@ -338,5 +338,25 @@ extends Flux<T>
 		public int getMode() {
 			return INNER;
 		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 }

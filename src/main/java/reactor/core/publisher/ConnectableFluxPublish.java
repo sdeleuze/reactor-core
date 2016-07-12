@@ -138,6 +138,11 @@ final class ConnectableFluxPublish<T> extends ConnectableFlux<T>
 	}
 
 	@Override
+	public Object connectedInput() {
+		return null;
+	}
+
+	@Override
 	public Object upstream() {
 		return source;
 	}
@@ -551,6 +556,31 @@ final class ConnectableFluxPublish<T> extends ConnectableFlux<T>
 		public Object upstream() {
 			return s;
 		}
+
+		@Override
+		public boolean hasDownstreams() {
+			return downstreamCount() != 0;
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 	
 	static final class InnerSubscription<T> implements Subscription, Introspectable, Receiver, Requestable, Cancellable {
@@ -621,6 +651,21 @@ final class ConnectableFluxPublish<T> extends ConnectableFlux<T>
 
 		void produced(long n) {
 			REQUESTED.addAndGet(this, -n);
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
 		}
 	}
 }

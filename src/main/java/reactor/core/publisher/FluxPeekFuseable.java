@@ -86,7 +86,7 @@ final class FluxPeekFuseable<T> extends FluxSource<T, T> implements Fuseable, Fl
 		source.subscribe(new PeekFuseableSubscriber<>(s, this));
 	}
 
-	static final class PeekFuseableSubscriber<T> 
+	static final class PeekFuseableSubscriber<T> extends AbstractQueueSubscription<T>
 	implements Subscriber<T>, Receiver, Producer, SynchronousSubscription<T> {
 
 		final Subscriber<? super T> actual;
@@ -288,7 +288,7 @@ final class FluxPeekFuseable<T> extends FluxSource<T, T> implements Fuseable, Fl
 		}
 	}
 
-	static final class PeekFuseableConditionalSubscriber<T> 
+	static final class PeekFuseableConditionalSubscriber<T> extends AbstractQueueSubscription<T>
 	implements ConditionalSubscriber<T>, Receiver, Producer, SynchronousSubscription<T> {
 
 		final ConditionalSubscriber<? super T> actual;

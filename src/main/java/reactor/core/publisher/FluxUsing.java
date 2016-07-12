@@ -129,7 +129,7 @@ final class FluxUsing<T, S> extends Flux<T> implements Receiver, Fuseable {
 		}
 	}
 
-	static final class UsingSubscriber<T, S>
+	static final class UsingSubscriber<T, S> extends AbstractQueueSubscription<T>
 			implements Subscriber<T>, QueueSubscription<T> {
 
 		final Subscriber<? super T> actual;
@@ -257,7 +257,7 @@ final class FluxUsing<T, S> extends Flux<T> implements Receiver, Fuseable {
 		}
 	}
 
-	static final class UsingFuseableSubscriber<T, S>
+	static final class UsingFuseableSubscriber<T, S> extends AbstractQueueSubscription<T>
 			implements Subscriber<T>, QueueSubscription<T> {
 
 		final Subscriber<? super T> actual;
@@ -396,7 +396,7 @@ final class FluxUsing<T, S> extends Flux<T> implements Receiver, Fuseable {
 		}
 	}
 
-	static final class UsingConditionalSubscriber<T, S>
+	static final class UsingConditionalSubscriber<T, S> extends AbstractQueueSubscription<T>
 			implements ConditionalSubscriber<T>, QueueSubscription<T> {
 
 		final ConditionalSubscriber<? super T> actual;

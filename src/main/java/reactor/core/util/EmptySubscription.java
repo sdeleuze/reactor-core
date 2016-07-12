@@ -1,5 +1,8 @@
 package reactor.core.util;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.reactivestreams.Subscriber;
 import reactor.core.flow.Fuseable;
 import reactor.core.state.Introspectable;
@@ -43,6 +46,11 @@ public enum EmptySubscription implements Fuseable.QueueSubscription<Object>, Int
 	}
 
 	@Override
+	public Object getId() {
+		return null;
+	}
+
+	@Override
 	public int getMode() {
 		return TRACE_ONLY;
 	}
@@ -50,6 +58,16 @@ public enum EmptySubscription implements Fuseable.QueueSubscription<Object>, Int
 	@Override
 	public String getName() {
 		return INSTANCE.name();
+	}
+
+	@Override
+	public Throwable getError() {
+		return null;
+	}
+
+	@Override
+	public long getPeriod() {
+		return -1L;
 	}
 
 	@Override
@@ -76,5 +94,79 @@ public enum EmptySubscription implements Fuseable.QueueSubscription<Object>, Int
 	public int requestFusion(int requestedMode) {
 		return Fuseable.NONE; // can't enable fusion due to complete/error possibility
 	}
+
+	@Override
+	public Object peek() {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public boolean add(Object t) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public boolean offer(Object t) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public Object remove() {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public Object element() {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public boolean contains(Object o) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public Iterator<Object> iterator() {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public Object[] toArray() {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public <T1> T1[] toArray(T1[] a) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public boolean addAll(Collection<?> c) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public boolean removeAll(Collection<?> c) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+	@Override
+	public boolean retainAll(Collection<?> c) {
+		throw new UnsupportedOperationException("Operators should not use this method!");
+	}
+
+
+
+
 
 }

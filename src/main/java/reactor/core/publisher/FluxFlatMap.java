@@ -945,6 +945,26 @@ final class FluxFlatMap<T, R> extends FluxSource<T, R> {
 		public Object downstream() {
 			return actual;
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 
 	static final class FlatMapInner<R>
@@ -1110,6 +1130,21 @@ final class FluxFlatMap<T, R> extends FluxSource<T, R> {
 		public Object downstream() {
 			return parent;
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 }
 
@@ -1237,7 +1272,7 @@ abstract class SpscFreeListTracker<T> {
 	}
 }
 
-final class SuppressFuseableSubscriber<T> implements Producer, Receiver, Subscriber<T>,
+final class SuppressFuseableSubscriber<T> extends Fuseable.AbstractQueueSubscription<T> implements Producer, Receiver, Subscriber<T>,
                                                      Fuseable.QueueSubscription<T> {
 
 	final Subscriber<? super T> actual;

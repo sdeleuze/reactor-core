@@ -33,7 +33,7 @@ import reactor.core.util.Exceptions;
  * @since 2.5
  * @param <T> the value type
  */
-public class LambdaSubscriber<T> implements BaseSubscriber<T>, Receiver, Cancellation, Completable,
+public class LambdaSubscriber<T> extends BaseSubscriber<T> implements Receiver, Cancellation, Completable,
                                             Backpressurable {
 
 	final Consumer<? super T>         consumer;
@@ -127,7 +127,7 @@ public class LambdaSubscriber<T> implements BaseSubscriber<T>, Receiver, Cancell
 
 	@Override
 	public final void onError(Throwable t) {
-		BaseSubscriber.super.onError(t);
+		super.onError(t);
 		doError(t);
 		subscription = null;
 	}
@@ -147,7 +147,7 @@ public class LambdaSubscriber<T> implements BaseSubscriber<T>, Receiver, Cancell
 
 	@Override
 	public final void onNext(T x) {
-		BaseSubscriber.super.onNext(x);
+		super.onNext(x);
 
 		try {
 			doNext(x);

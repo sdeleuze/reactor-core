@@ -151,5 +151,10 @@ final class FluxTakeUntilPredicate<T> extends FluxSource<T, T> {
 		public void cancel() {
 			s.cancel();
 		}
+
+		@Override
+		public Object connectedOutput() {
+			return null;
+		}
 	}
 }

@@ -283,6 +283,15 @@ final class SerializedSubscriber<T>
 		return 0;
 	}
 
+	@Override
+	public String getName() {
+		return getClass().getSimpleName();
+	}
+
+	@Override
+	public long getPeriod() {
+		return -1L;
+	}
 
 	@Override
 	public long getCapacity() {
@@ -309,5 +318,10 @@ final class SerializedSubscriber<T>
 			array[0] = value;
 			count = 1;
 		}
+	}
+
+	@Override
+	public Object getId() {
+		return null;
 	}
 }

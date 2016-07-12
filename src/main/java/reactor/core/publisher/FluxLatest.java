@@ -251,5 +251,25 @@ final class FluxLatest<T> extends FluxSource<T, T> {
 		public Object upstream() {
 			return s;
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 }

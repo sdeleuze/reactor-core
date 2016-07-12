@@ -307,6 +307,11 @@ final class FluxWindow<T> extends FluxSource<T, Flux<T>> {
 		public long limit() {
 			return size;
 		}
+
+		@Override
+		public boolean hasDownstreams() {
+			return downstreamCount() != 0;
+		}
 	}
 
 	static final class WindowSkipSubscriber<T> implements Subscriber<T>, Subscription, Runnable, MultiProducer,
@@ -515,6 +520,11 @@ final class FluxWindow<T> extends FluxSource<T, Flux<T>> {
 		@Override
 		public long getPending() {
 			return skip + size - index;
+		}
+
+		@Override
+		public boolean hasDownstreams() {
+			return downstreamCount() != 0;
 		}
 	}
 
@@ -853,6 +863,31 @@ final class FluxWindow<T> extends FluxSource<T, Flux<T>> {
 			if (WIP.decrementAndGet(this) == 0) {
 				s.cancel();
 			}
+		}
+
+		@Override
+		public boolean hasDownstreams() {
+			return downstreamCount() != 0;
+		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public String getName() {
+			return getClass().getSimpleName();
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
 		}
 	}
 

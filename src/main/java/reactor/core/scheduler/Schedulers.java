@@ -629,6 +629,26 @@ public class Schedulers {
 		public String getName() {
 			return name;
 		}
+
+		@Override
+		public Object getId() {
+			return null;
+		}
+
+		@Override
+		public int getMode() {
+			return 0;
+		}
+
+		@Override
+		public Throwable getError() {
+			return null;
+		}
+
+		@Override
+		public long getPeriod() {
+			return -1L;
+		}
 	}
 
 	static class CachedScheduler implements Scheduler {
@@ -701,5 +721,12 @@ public class Schedulers {
 		TimedScheduler asTimedScheduler() {
 			return this;
 		}
+
+		@Override
+		public long now(TimeUnit unit) {
+			return unit.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+		}
+
+
 	}
 }
